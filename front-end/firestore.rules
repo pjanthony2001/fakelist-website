@@ -1,0 +1,25 @@
+service cloud.firestore {
+  rules_version = "2";  // Déclaration de la version des règles
+
+  match /databases/{database}/documents {
+
+    // Règles pour la collection 'pixels'
+    match /pixels/{pixelId} {
+      allow create: if request.auth != null && canPlacePixel(request.auth.uid);
+    }
+
+    // Règles pour la collection 'users'
+    match /users/{userId} {
+      allow read, update: if request.auth != null && request.auth.uid == userId;
+    }
+  }
+
+  // Fonction pour vérifier le cooldown
+  function canPlacePixel(userId) {
+    let userDoc = get(/databases/$(database)/documents/users/$(userId));
+
+    return userDoc.exists() &&
+           (userDoc.data.keys().hasAny(["lastClicked"]) == false ||
+            (request.time - userDoc.data["lastClicked"] > duration.value(5, "s")));
+  }
+}
