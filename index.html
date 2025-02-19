@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Grid</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.js"></script>
+    <style>
+        #grid {
+            display: grid;
+            grid-template-columns: repeat(10, 20px);
+            grid-template-rows: repeat(10, 20px);
+            gap: 2px;
+        }
+        .pixel {
+            width: 20px;
+            height: 20px;
+            background: lightgray;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <h1>Real-Time Grid</h1>
+    <div id="grid"></div>
+
+    <script>
+        const socket = io("https://your-aws-backend.com");  // Use your AWS instance URL
+        const grid = document.getElementById("grid");
+
+        // Create grid
+        for (let y = 0; y < 10; y++) {
+            for (let x = 0; x < 10; x++) {
+                let pixel = document.createElement("div");
+                pixel.classList.add("pixel");
+                pixel.dataset.x = x;
+                pixel.dataset.y = y;
+                pixel.addEventListener("click", () => {
+                    let color = "red";  // Example: Change color on click
+                    socket.emit("select_pixel", { x, y, color });
+                    pixel.style.background = color;
+                });
+                grid.appendChild(pixel);
+            }
+        }
+
+        // Listen for updates from server
+        socket.on("update_pixel", (data) => {
+            let pixels = document.querySelectorAll(".pixel");
+            pixels.forEach(pixel => {
+                if (pixel.dataset.x == data.x && pixel.dataset.y == data.y) {
+                    pixel.style.background = data.color;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
