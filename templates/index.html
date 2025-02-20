@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Grid</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.4/socket.io.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        .grid { display: grid; grid-template-columns: repeat(5, 50px); gap: 5px; justify-content: center; }
+        .cell { width: 50px; height: 50px; background-color: lightgray; border: 1px solid #000; }
+        .cell.colored { background-color: blue; }
+    </style>
+</head>
+<body>
+    <h1>Shared Clickable Grid</h1>
+    <div id="grid" class="grid"></div>
+
+    <script>
+        var socket = io("http://your-ec2-public-ip:5000");  // Connect WebSocket
+
+        // Create grid dynamically
+        const GRID_SIZE = 5;
+        const gridElement = document.getElementById("grid");
+
+        for (let row = 0; row < GRID_SIZE; row++) {
+            for (let col = 0; col < GRID_SIZE; col++) {
+                let cell = document.createElement("div");
+                cell.classList.add("cell");
+                cell.dataset.row = row;
+                cell.dataset.col = col;
+                cell.addEventListener("click", () => {
+                    socket.emit("click_cell", { row: row, col: col });  // Send click event
+                });
+                gridElement.appendChild(cell);
+            }
+        }
+
+        // Listen for grid updates from the server
+        socket.on("update_grid", function(data) {
+            let gridData = data.grid;
+            document.querySelectorAll(".cell").forEach(cell => {
+                let row = cell.dataset.row;
+                let col = cell.dataset.col;
+                if (gridData[row][col] === 1) {
+                    cell.classList.add("colored");
+                } else {
+                    cell.classList.remove("colored");
+                }
+            });
+        });
+    </script>
+</body>
+</html>
