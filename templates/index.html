@@ -3,52 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Live Grid</title>
+
+    <title>Pichel War</title>
+    <meta name="description" value="Vous connaissez peut-être la pixel Wars ? Et bien la Fakelist vous invite à batailler sur cette zone d'expression qu'elle vous offre.
+    Venez conquérir des pixels !">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../static/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.4/socket.io.js"></script>
-    <style>
-        body { font-family: Arial, sans-serif; text-align: center; }
-        .grid { display: grid; grid-template-columns: repeat(5, 50px); gap: 5px; justify-content: center; }
-        .cell { width: 50px; height: 50px; background-color: lightgray; border: 1px solid #000; }
-        .cell.colored { background-color: blue; }
-    </style>
 </head>
 <body>
-    <h1>Shared Clickable Grid</h1>
+    <h1>PICHEL WAR</h1>
+
     
     <div id="grid" class="grid">
-        <!-- Statically generated 5x5 grid -->
-        {% for row in range(5) %}
-            {% for col in range(5) %}
+        {% for row in range(36) %}
+            {% for col in range(64) %}
                 <div class="cell" data-row="{{ row }}" data-col="{{ col }}"></div>
             {% endfor %}
         {% endfor %}
     </div>
 
-    <script>
-        var socket = io(); // Connect WebSocket
+    <div id=colorBox> 
+        <div id="colorsChoice"></div>
+    </div>
 
-        // Add click event listeners to static grid cells
-        document.querySelectorAll(".cell").forEach(cell => {
-            cell.addEventListener("click", () => {
-                let row = cell.dataset.row;
-                let col = cell.dataset.col;
-                socket.emit("click_cell", { row: row, col: col });  // Send click event
-            });
-        });
+    <script src="../static/script.js"> </script> 
 
-        // Listen for grid updates from the server
-        socket.on("update_grid", function(data) {
-            let gridData = data.grid;
-            document.querySelectorAll(".cell").forEach(cell => {
-                let row = cell.dataset.row;
-                let col = cell.dataset.col;
-                if (gridData[row][col] === 1) {
-                    cell.classList.add("colored");
-                } else {
-                    cell.classList.remove("colored");
-                }
-            });
-        });
-    </script>
 </body>
 </html>

@@ -4,9 +4,7 @@ from flask_socketio import SocketIO, emit
 app = Flask(__name__)
 socketio = SocketIO(app, cors_allowed_origins="*")
 
-# Define a 5x5 grid (0 means uncolored, 1 means colored)
-GRID_SIZE = 5
-grid_state = [[0] * GRID_SIZE for _ in range(GRID_SIZE)]
+grid_state = [["#f8f8ff"] * 64 for _ in range(32)]
 
 @app.route("/")
 def index():
@@ -15,10 +13,9 @@ def index():
 @socketio.on("click_cell")
 def handle_click(data):
     """Handles a cell click, updates state, and broadcasts update."""
-    row, col = data["row"], data["col"]
+    row, col, color = data["row"], data["col"], data["color"]
     row, col = int(row), int(col) 
-    # Toggle cell color (0 → 1, 1 → 0)
-    grid_state[row][col] = 1 if grid_state[row][col] == 0 else 0
+    grid_state[row][col] = color
 
     # Broadcast updated grid to all clients
     socketio.emit("update_grid", {"grid": grid_state})
