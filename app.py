@@ -29,4 +29,5 @@ def send_initial_grid():
     emit("update_grid", {"grid": grid_state})
 
 if __name__ == "__main__":
-    socketio.run(app, host="0.0.0.0", port=5000)
+    print("Here")
+    socketio.run(app, host="0.0.0.0", port=5000, debug=True)
