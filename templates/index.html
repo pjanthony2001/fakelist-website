@@ -15,17 +15,35 @@
 <body>
     <h1>PICHEL WAR</h1>
 
-    
-    <div id="grid" class="grid">
-        {% for row in range(36) %}
-            {% for col in range(64) %}
-                <div class="cell" data-row="{{ row }}" data-col="{{ col }}"></div>
+    <div id=gridholder>
+        <div id="grid" class="grid">
+            {% for row in range(36) %}
+                {% for col in range(64) %}
+                    <div class="cell" data-row="{{ row }}" data-col="{{ col }}"></div>
+                {% endfor %}
             {% endfor %}
-        {% endfor %}
+        </div>
+
+        <div id="gridlayer" class="gridlayer">
+            {% for row in range(36) %}
+                {% for col in range(64) %}
+                    <div class="celllayer" data-row="{{ row }}" data-col="{{ col }}"></div>
+                {% endfor %}
+            {% endfor %}
+        </div>
+
+
     </div>
 
     <div id=colorBox> 
         <div id="colorsChoice"></div>
+    </div>
+
+    <div class="cooldown-container">
+        <div class="progress-bar">
+            <div id="progress"></div>
+        </div>
+        <p id="timer-text">Ready</p>
     </div>
 
     <script src="../static/script.js"> </script> 
