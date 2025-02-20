@@ -14,27 +14,27 @@
 </head>
 <body>
     <h1>Shared Clickable Grid</h1>
-    <div id="grid" class="grid"></div>
+    
+    <div id="grid" class="grid">
+        <!-- Statically generated 5x5 grid -->
+        {% for row in range(5) %}
+            {% for col in range(5) %}
+                <div class="cell" data-row="{{ row }}" data-col="{{ col }}"></div>
+            {% endfor %}
+        {% endfor %}
+    </div>
 
     <script>
         var socket = io(); // Connect WebSocket
 
-        // Create grid dynamically
-        const GRID_SIZE = 5;
-        const gridElement = document.getElementById("grid");
-
-        for (let row = 0; row < GRID_SIZE; row++) {
-            for (let col = 0; col < GRID_SIZE; col++) {
-                let cell = document.createElement("div");
-                cell.classList.add("cell");
-                cell.dataset.row = row;
-                cell.dataset.col = col;
-                cell.addEventListener("click", () => {
-                    socket.emit("click_cell", { row: row, col: col });  // Send click event
-                });
-                gridElement.appendChild(cell);
-            }
-        }
+        // Add click event listeners to static grid cells
+        document.querySelectorAll(".cell").forEach(cell => {
+            cell.addEventListener("click", () => {
+                let row = cell.dataset.row;
+                let col = cell.dataset.col;
+                socket.emit("click_cell", { row: row, col: col });  // Send click event
+            });
+        });
 
         // Listen for grid updates from the server
         socket.on("update_grid", function(data) {
