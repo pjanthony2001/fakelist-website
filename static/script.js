@@ -68,10 +68,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function checkCooldownStatus() {
-        fetch('/check-cooldown', { method: 'GET' })
+        fetch('/check-cooldown/', { method: 'GET' })
             .then(response => response.json())
             .then(data => {
-                if (data.cooldownOver) {
+                if (data.status === 'ok') {
                     timerText.textContent = "Ready!";
                     progressBar.style.width = "100%";
                     cooldownActive = false;
