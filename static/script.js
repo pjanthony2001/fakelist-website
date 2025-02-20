@@ -50,6 +50,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         cooldownActive = true;
         progressBar.style.width = "0%";
+        progressBar.style.color = "red";
         timerText.textContent = `Cooldown: ${cooldownTime / 1000}s`;
 
         let remainingTime = cooldownTime;
@@ -79,6 +80,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (data.cooldownOver) {
                     timerText.textContent = "Ready!";
                     progressBar.style.width = "100%";
+                    progressBar.style.color = "#4CAF50";
                     cooldownActive = false;
                 } else {
                     timerText.textContent = "Still on cooldown...";
