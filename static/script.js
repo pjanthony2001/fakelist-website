@@ -101,7 +101,7 @@ document.querySelectorAll(".celllayer").forEach(cell => {
         let row = cell.dataset.row;
         let col = cell.dataset.col;
         startCooldown();
-        socket.emit("click_cell", { row: row, col: col, color: currentColorChoice, token: "stirng"});  // Send click event
+        socket.emit("click_cell", { row: row, col: col, color: currentColorChoice});  // Send click event
     });
 });
 

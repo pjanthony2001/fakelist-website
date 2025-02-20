@@ -9,12 +9,9 @@ socketio = SocketIO(app, cors_allowed_origins="*")
 grid_state = [["#f8f8ff"] * 64 for _ in range(36)]
 cooldowns = {}
 cooldown_time = 5000 # in ms
+error = 10 # in ms
 
-def is_cooldown_over(token):
-    curr_time = time.perf_counter()
-    prev_time = cooldowns[token]
-    print(curr_time - prev_time)
-    return (curr_time - prev_time) * 1000 >= cooldown_time
+
 
 @app.route("/")
 def index():
@@ -22,8 +19,15 @@ def index():
 
 @app.route("/check-cooldown")
 def handle_check_cooldown():
-    resp = jsonify(success=True)
-    return resp
+    
+    real_ip = request.headers.get('X-Real-IP')
+    curr_time = time.perf_counter()
+    if real_ip in cooldowns:
+        prev_time = cooldowns[real_ip]
+    if (curr_time - prev_time) * 1000 < cooldown_time + error: 
+        return jsonify(success=False)
+        
+    return jsonify(success=True)
 
 
 @socketio.on("click_cell")
@@ -32,13 +36,16 @@ def handle_click(data):
     real_ip = request.headers.get('X-Real-IP')
     forwarded_for = request.headers.get('X-Forwarded-For')
     user_agent = request.headers.get('User-Agent')
-
-    # Log the headers or do something with them
-    print(f"X-Real-IP: {real_ip}")
-    print(f"X-Forwarded-For: {forwarded_for}")
-    print(f"User-Agent: {user_agent}")
     
-    row, col, color, token = data["row"], data["col"], data["color"], data["token"]
+    curr_time = time.perf_counter()
+    if real_ip in cooldowns:
+        prev_time = cooldowns[real_ip]
+        if (curr_time - prev_time) * 1000 < cooldown_time: 
+            return 
+        
+    cooldowns[real_ip] = curr_time
+    
+    row, col, color = data["row"], data["col"], data["color"]
     row, col = int(row), int(col)
     grid_state[row][col] = color
 
