@@ -69,20 +69,25 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function checkCooldownStatus() {
         fetch('/check-cooldown/', { method: 'GET' })
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json(); // Parse the JSON if the response was OK
+            })
             .then(data => {
-                if (data.status === 'ok') {
+                if (data.cooldownOver) {
                     timerText.textContent = "Ready!";
                     progressBar.style.width = "100%";
                     cooldownActive = false;
                 } else {
                     timerText.textContent = "Still on cooldown...";
-                    setTimeout(checkCooldownStatus, 2000); // Check again in 2 seconds
+                    setTimeout(checkCooldownStatus, 3000); // Check again in 3 seconds
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
-                timerText.textContent = "Error checking cooldown";
+                timerText.textContent = "Error checking cooldown, problem contacting server";
             });
     }
 
