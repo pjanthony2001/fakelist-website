@@ -16,7 +16,7 @@ def index():
 def handle_click(data):
     """Handles a cell click, updates state, and broadcasts update."""
     row, col = data["row"], data["col"]
-    
+    row, col = int(row), int(col) 
     # Toggle cell color (0 → 1, 1 → 0)
     grid_state[row][col] = 1 if grid_state[row][col] == 0 else 0
 
