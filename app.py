@@ -17,9 +17,8 @@ error = 10 # in ms
 def index():
     return render_template("index.html")
 
-@app.route("/check-cooldown")
+@app.route("/check-cooldown/")
 def handle_check_cooldown():
-    
     real_ip = request.headers.get('X-Real-IP')
     curr_time = time.perf_counter()
     if real_ip in cooldowns:
