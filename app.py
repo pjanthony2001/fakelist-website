@@ -22,13 +22,13 @@ def handle_check_cooldown():
     real_ip = request.headers.get('X-Real-IP')
     curr_time = time.perf_counter()
     response = {"cooldownOver" : True}
-    
+
     if real_ip in cooldowns:
         prev_time = cooldowns[real_ip]
-        if (curr_time - prev_time) * 1000 < cooldown_time + error: 
+        if (curr_time - prev_time) * 1000 < cooldown_time + error:
             response = {"cooldownOver" : False}
 
-    return jsonify(response, success=True)
+    return jsonify(response), 200
 
 
 @socketio.on("click_cell")

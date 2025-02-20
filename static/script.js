@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         cooldownActive = true;
         progressBar.style.width = "0%";
-        progressBar.style.color = "#ff0000";
+        progressBar.style.background = "#ff0000"; //red
         timerText.textContent = `Cooldown: ${cooldownTime / 1000}s`;
 
         let remainingTime = cooldownTime;
@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     cooldownActive = false;
                 } else {
                     timerText.textContent = "Still on cooldown...";
-                    setTimeout(checkCooldownStatus, 3000); // Check again in 3 seconds
+                    setTimeout(checkCooldownStatus, 2000); // Check again in 2 seconds
                 }
             })
             .catch(error => {
