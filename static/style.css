@@ -14,7 +14,7 @@
     grid-column: 1;
     grid-row: 1;
     display: grid;
-    grid-template-columns: repeat(96, 10px); /* 256 columns */
+    grid-template-columns: repeat(96, 9px); /* 256 columns */
     grid-gap: 0px; /* No spacing */
     grid-row-gap: 0px;
     align-self: center;
@@ -31,7 +31,7 @@
   display: grid;
   grid-column: 1;
   grid-row: 1;
-  grid-template-columns: repeat(96, 10px); /* 256 columns */
+  grid-template-columns: repeat(96, 9px); /* 256 columns */
   grid-gap: 0px; /* No spacing */
   grid-row-gap: 0px;
   align-self: center;
@@ -43,8 +43,8 @@
 }
 
 .celllayer {
-  width: 10px;
-  height: 10px;
+  width: 9px;
+  height: 9px;
   background-color: transparent;
   border: 1px solid black; 
 }
@@ -59,8 +59,8 @@
 }
 
 .cell {
-    width: 10px;
-    height: 10px;
+    width: 9px;
+    height: 9px;
     background-color: transparent;
     opacity: 80%;
     border: 1px solid black; 
@@ -71,10 +71,9 @@
 body {
   margin: 0;
   background-image: url('background.jpg');
-  background-size: cover;  /* Stretch the image to cover the entire screen */
+  background-size: cover;  /* Stretch the image to cover the entire screen */7
   background-position: center center;  /* Center the image */
   background-attachment: fixed;  /* Optional: Keeps the background fixed while scrolling */
-  height: 90vh; 
 }
 
 h1 {
