@@ -18,14 +18,13 @@
     grid-template-columns: repeat(96, 1fr); /* 256 columns */
     grid-template-rows: repeat(54, 1fr);
     grid-gap: 0px; /* No spacing */
-    grid-row-gap: 0px;
     align-self: center;
     align-content: center;
     justify-self: center;
     justify-content: center;
 
-    width: 100vmin; /* Keeps grid responsive based on screen size */
-    height: 56.25vmin;
+    width: 96vmin; /* Keeps grid responsive based on screen size */
+    height: 54vmin;
 }
 
 /* .gridlayer:hover {
@@ -39,7 +38,6 @@
   grid-template-columns: repeat(96, 1fr); /* 256 columns */
   grid-template-rows: repeat(54, 1fr);
   grid-gap: 0px; /* No spacing */
-  grid-row-gap: 0px;
   align-self: center;
   align-content: center;
   justify-self: center;
@@ -47,8 +45,8 @@
   opacity: 70%;
   z-index: 2;
 
-  width: 100vmin; /* Keeps grid responsive based on screen size */
-  height: 56.25vmin;
+  width: 96vmin; /* Keeps grid responsive based on screen size */
+  height: 54vmin;
 }
 
 .celllayer {
@@ -59,7 +57,7 @@
 }
 
 .celllayer:hover {
-  background-color: var(--hover-color); /* Change to blue when hovered */
+  background-color: var(--hover-color);
 }
 
 /* When not hovering over .cell */

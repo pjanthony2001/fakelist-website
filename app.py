@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, jsonify
 from flask_socketio import SocketIO, emit
 import time
 import csv
+import pickle
 
 app = Flask(__name__)
 socketio = SocketIO(app, cors_allowed_origins="*")
@@ -13,6 +14,7 @@ error = 100 # in ms
 csv_file_path = 'data.csv'
 batch_size = 100
 
+counter = 0
 batch_data = []
 
 
@@ -26,6 +28,8 @@ def write_to_csv(data):
         for row in data:
             writer.writerow(row)
 
+def write_pickle(grid):
+    pickle.dump(grid, file = open(f"grid_{counter}.pkl", "wb"))
 
 @app.route("/")
 def index():
@@ -66,6 +70,9 @@ def handle_click(data):
     if len(batch_data) >= batch_size:
         write_to_csv(batch_data)
         batch_data = []
+        write_pickle(grid_state)
+        counter += 1
+
 
     # Broadcast updated grid to all clients
     socketio.emit("update_grid", {"grid": grid_state})
