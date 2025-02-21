@@ -6,7 +6,7 @@ import csv
 app = Flask(__name__)
 socketio = SocketIO(app, cors_allowed_origins="*")
 
-grid_state = [["#f8f8ff"] * 80 for _ in range(54)]
+grid_state = [["#f8f8ff"] * 96 for _ in range(54)]
 cooldowns = {}
 cooldown_time = 5000 # in ms
 error = 100 # in ms

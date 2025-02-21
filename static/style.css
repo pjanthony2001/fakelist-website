@@ -14,7 +14,7 @@
     grid-column: 1;
     grid-row: 1;
     display: grid;
-    grid-template-columns: repeat(80, 15px); /* 256 columns */
+    grid-template-columns: repeat(96, 10px); /* 256 columns */
     grid-gap: 0px; /* No spacing */
     grid-row-gap: 0px;
     align-self: center;
@@ -31,7 +31,7 @@
   display: grid;
   grid-column: 1;
   grid-row: 1;
-  grid-template-columns: repeat(80, 15px); /* 256 columns */
+  grid-template-columns: repeat(96, 10px); /* 256 columns */
   grid-gap: 0px; /* No spacing */
   grid-row-gap: 0px;
   align-self: center;
@@ -43,8 +43,8 @@
 }
 
 .celllayer {
-  width: 15px;
-  height: 15px;
+  width: 10px;
+  height: 10px;
   background-color: transparent;
   border: 1px solid black; 
 }
@@ -59,8 +59,8 @@
 }
 
 .cell {
-    width: 15px;
-    height: 15px;
+    width: 10px;
+    height: 10px;
     background-color: transparent;
     opacity: 80%;
     border: 1px solid black; 
@@ -74,7 +74,7 @@ body {
   background-size: cover;  /* Stretch the image to cover the entire screen */
   background-position: center center;  /* Center the image */
   background-attachment: fixed;  /* Optional: Keeps the background fixed while scrolling */
-  height: 100vh; 
+  height: 90vh; 
 }
 
 h1 {
@@ -147,7 +147,7 @@ h1 {
 
 .cooldown-container {
     padding-top: 2%;
-    padding-bottom: 0.5%;
+    padding-bottom: 0.1%;
     align-self: center;
     justify-self: center;
     text-align: center;
@@ -160,7 +160,6 @@ h1 {
     background: #333;
     border-radius: 10px;
     overflow: hidden;
-    margin: 10px 0;
 }
 
 #progress {
@@ -187,10 +186,10 @@ h1 {
   }
 
   .grid {
-    grid-template-columns: repeat(64, 5px);
+    grid-template-columns: repeat(96, 5px);
   }
   .gridlayer {
-    grid-template-columns: repeat(64, 5px);
+    grid-template-columns: repeat(96, 5px);
   }
 
   .cell {
@@ -230,10 +229,10 @@ h1 {
   }
 
   .grid {
-    grid-template-columns: repeat(64, 5px);
+    grid-template-columns: repeat(96, 5px);
   }
   .gridlayer {
-    grid-template-columns: repeat(64, 5px);
+    grid-template-columns: repeat(96, 5px);
   }
 
   .cell {

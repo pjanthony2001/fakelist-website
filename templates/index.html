@@ -18,7 +18,7 @@
     <div id=gridholder>
         <div id="grid" class="grid">
             {% for row in range(54) %}
-                {% for col in range(80) %}
+                {% for col in range(96) %}
                     <div class="cell" data-row="{{ row }}" data-col="{{ col }}"></div>
                 {% endfor %}
             {% endfor %}
@@ -26,7 +26,7 @@
 
         <div id="gridlayer" class="gridlayer">
             {% for row in range(54) %}
-                {% for col in range(80) %}
+                {% for col in range(96) %}
                     <div class="celllayer" data-row="{{ row }}" data-col="{{ col }}"></div>
                 {% endfor %}
             {% endfor %}
@@ -43,7 +43,7 @@
         <div class="progress-bar">
             <div id="progress"></div>
         </div>
-        <p id="timer-text">Prêt</p>
+        <p id="timer-text">Prêt!</p>
     </div>
 
     <script src="../static/script.js"> </script> 
