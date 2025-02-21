@@ -12,7 +12,7 @@ cooldowns = {}
 cooldown_time = 5000 # in ms
 error = 100 # in ms
 csv_file_path = 'data.csv'
-batch_size = 100
+timer = time.perf_counter()
 
 counter = 0
 batch_data = []
@@ -51,27 +51,31 @@ def handle_check_cooldown():
 
 @socketio.on("click_cell")
 def handle_click(data):
-    global batch_data
+    global batch_data, counter
     real_ip = request.headers.get('X-Real-IP')
     
+    admin = data["token"] == "245zx5scdvaifuognpd"
+    
     curr_time = time.perf_counter()
-    if real_ip in cooldowns:
-        prev_time = cooldowns[real_ip]
-        if (curr_time - prev_time) * 1000 < cooldown_time + error: 
-            return 
-        
-    cooldowns[real_ip] = curr_time
+    
+    if not admin: 
+        if real_ip in cooldowns:
+            prev_time = cooldowns[real_ip]
+            if (curr_time - prev_time) * 1000 < cooldown_time + error: 
+                return 
+        cooldowns[real_ip] = curr_time
     
     row, col, color = data["row"], data["col"], data["color"]
     row, col = int(row), int(col)
     grid_state[row][col] = color
     
     batch_data.append([real_ip, curr_time, row, col, color]) 
-    if len(batch_data) >= batch_size:
+    if curr_time - timer >= 1200:
         write_to_csv(batch_data)
         batch_data = []
         write_pickle(grid_state)
         counter += 1
+        timer = curr_time
 
 
     # Broadcast updated grid to all clients

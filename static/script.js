@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
     
     let cooldownTime = 5000; // Cooldown duration in miliseconds
     let cooldownActive = false;
-    let updateDelay = 10;
+    let updateDelay = 100;
 
     function startCooldown() {
         if (cooldownActive) return;
@@ -108,7 +108,7 @@ document.querySelectorAll(".celllayer").forEach(cell => {
         let row = cell.dataset.row;
         let col = cell.dataset.col;
         startCooldown();
-        socket.emit("click_cell", { row: row, col: col, color: currentColorChoice});  // Send click event
+        socket.emit("click_cell", { row: row, col: col, color: currentColorChoice, token: "None"});  // Send click event
     });
 });
 
