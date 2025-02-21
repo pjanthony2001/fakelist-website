@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (remainingTime <= 0) {
                 clearInterval(interval);
-                timerText.textContent = "Verifying...";
+                timerText.textContent = "Vérification ...";
                 checkCooldownStatus();
             }
         }, updateDelay);
@@ -78,18 +78,18 @@ document.addEventListener("DOMContentLoaded", function () {
             })
             .then(data => {
                 if (data.cooldownOver) {
-                    timerText.textContent = "Ready!";
+                    timerText.textContent = "Prêt!";
                     progressBar.style.width = "100%";
                     progressBar.style.background = "#4CAF50"; //green
                     cooldownActive = false;
                 } else {
-                    timerText.textContent = "Still on cooldown...";
+                    timerText.textContent = "Toujours en cooldown ...";
                     setTimeout(checkCooldownStatus, 2000); // Check again in 2 seconds
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
-                timerText.textContent = "Error checking cooldown, problem contacting server";
+                timerText.textContent = "Erreur de cooldown, problème de lien avec le serveur";
             });
     }
 

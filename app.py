@@ -6,7 +6,7 @@ import csv
 app = Flask(__name__)
 socketio = SocketIO(app, cors_allowed_origins="*")
 
-grid_state = [["#f8f8ff"] * 64 for _ in range(36)]
+grid_state = [["#f8f8ff"] * 80 for _ in range(54)]
 cooldowns = {}
 cooldown_time = 5000 # in ms
 error = 100 # in ms
@@ -77,4 +77,4 @@ def send_initial_grid():
 
 if __name__ == "__main__":
     print("Here")
-    socketio.run(app, host="0.0.0.0", port=5000, debug=True)
+    socketio.run(app, host="0.0.0.0", port=5000)
