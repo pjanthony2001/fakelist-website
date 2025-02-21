@@ -8,19 +8,24 @@
 #gridholder {
   display: grid;
   width: 100%;
+  height: 100%;
 }
 
 .grid {
     grid-column: 1;
     grid-row: 1;
     display: grid;
-    grid-template-columns: repeat(96, 9px); /* 256 columns */
+    grid-template-columns: repeat(96, 1fr); /* 256 columns */
+    grid-template-rows: repeat(54, 1fr);
     grid-gap: 0px; /* No spacing */
     grid-row-gap: 0px;
     align-self: center;
     align-content: center;
     justify-self: center;
     justify-content: center;
+
+    width: 100vmin; /* Keeps grid responsive based on screen size */
+    height: 56.25vmin;
 }
 
 /* .gridlayer:hover {
@@ -31,7 +36,8 @@
   display: grid;
   grid-column: 1;
   grid-row: 1;
-  grid-template-columns: repeat(96, 9px); /* 256 columns */
+  grid-template-columns: repeat(96, 1fr); /* 256 columns */
+  grid-template-rows: repeat(54, 1fr);
   grid-gap: 0px; /* No spacing */
   grid-row-gap: 0px;
   align-self: center;
@@ -40,11 +46,14 @@
   justify-content: center;
   opacity: 70%;
   z-index: 2;
+
+  width: 100vmin; /* Keeps grid responsive based on screen size */
+  height: 56.25vmin;
 }
 
 .celllayer {
-  width: 9px;
-  height: 9px;
+  width: 100%;
+  height: 100%;
   background-color: transparent;
   border: 1px solid black; 
 }
@@ -59,8 +68,8 @@
 }
 
 .cell {
-    width: 9px;
-    height: 9px;
+  width: 100%;
+  height: 100%;
     background-color: transparent;
     opacity: 80%;
     border: 1px solid black; 
@@ -71,7 +80,7 @@
 body {
   margin: 0;
   background-image: url('background.jpg');
-  background-size: cover;  /* Stretch the image to cover the entire screen */7
+  background-size: cover;  /* Stretch the image to cover the entire screen */
   background-position: center center;  /* Center the image */
   background-attachment: fixed;  /* Optional: Keeps the background fixed while scrolling */
 }
