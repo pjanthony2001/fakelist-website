@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (data.cooldownOver) {
                     timerText.textContent = "Ready!";
                     progressBar.style.width = "100%";
-                    progressBar.style.color = "#4CAF50";
+                    progressBar.style.background = "#4CAF50"; //green
                     cooldownActive = false;
                 } else {
                     timerText.textContent = "Still on cooldown...";

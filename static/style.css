@@ -22,9 +22,9 @@
     justify-content: center;
 }
 
-.grid:hover {
+/* .gridlayer:hover {
   cursor: none;
-}
+} */
 
 .gridlayer {
   display: grid;
@@ -61,6 +61,7 @@
     width: 15px;
     height: 15px;
     background-color: transparent;
+    opacity: 80%;
     border: 1px solid black; 
 }
 
@@ -68,6 +69,11 @@
 
 body {
   margin: 0;
+  background-image: url('background.jpg');
+  background-size: cover;  /* Stretch the image to cover the entire screen */
+  background-position: center center;  /* Center the image */
+  background-attachment: fixed;  /* Optional: Keeps the background fixed while scrolling */
+  height: 100vh; 
 }
 
 h1 {
@@ -160,4 +166,11 @@ h1 {
     width: 100%;
     height: 100%;
     background: #4CAF50;
+}
+
+#timer-text {
+  color: whitesmoke;
+  font-family: "MedievalSharp", serif;
+  font-weight: 400;
+  font-style: normal;
 }
