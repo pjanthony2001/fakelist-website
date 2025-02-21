@@ -179,6 +179,14 @@ h1 {
 
 /* Mobile responsiveness */
 @media screen and (max-width: 768px) {
+  body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%; /* Ensure the body and html take up full height */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    overflow-y: hidden; /* Prevent vertical scrolling */
+  }
+
   .grid {
     grid-template-columns: repeat(64, 5px);
   }
@@ -208,9 +216,19 @@ h1 {
   #colorsChoice {
     grid-template-columns: repeat(6, 1fr); /* Fewer colors per row */
   }
+
+  
 }
 
 @media screen and (max-width: 480px) {
+  body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%; /* Ensure the body and html take up full height */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    overflow-y: hidden; /* Prevent vertical scrolling */
+  }
+  
   .grid {
     grid-template-columns: repeat(64, 5px);
   }
