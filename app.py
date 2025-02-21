@@ -6,8 +6,13 @@ import pickle
 
 app = Flask(__name__)
 socketio = SocketIO(app, cors_allowed_origins="*")
+with open("grid_0.pkl", 'rb') as file:
+    grid_state = pickle.load(file)
 
-grid_state = [["#f8f8ff"] * 96 for _ in range(54)]
+if len(grid_state[0][0]) != 7:
+    print(grid_state[0][0])
+    grid_state[0][0] = '#888FFF'
+    
 cooldowns = {}
 cooldown_time = 5000 # in ms
 error = 100 # in ms
