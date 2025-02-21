@@ -176,3 +176,63 @@ h1 {
   font-weight: 400;
   font-style: normal;
 }
+
+/* Mobile responsiveness */
+@media screen and (max-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(64, 5px);
+  }
+  .gridlayer {
+    grid-template-columns: repeat(64, 5px);
+  }
+
+  .cell {
+    width: 5px;
+    height: 5px;
+    border: 1px solid black; 
+ }
+
+.celllayer {
+  width: 5px;
+  height: 5px;
+  border: 1px solid black; 
+}
+
+
+  h1 {
+    font-size: 1.5rem; /* Reduce font size for smaller screens */
+  }
+  #colorBox {
+    width: 100%; /* Make color box responsive */
+  }
+  #colorsChoice {
+    grid-template-columns: repeat(6, 1fr); /* Fewer colors per row */
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .grid {
+    grid-template-columns: repeat(64, 5px);
+  }
+  .gridlayer {
+    grid-template-columns: repeat(64, 5px);
+  }
+
+  .cell {
+    width: 5px;
+    height: 5px;
+    border: 1px solid black; 
+ }
+
+.celllayer {
+  width: 5px;
+  height: 5px;
+  border: 1px solid black; 
+}
+  #colorBox {
+    width: 100%; /* Full width on small screens */
+  }
+  #colorsChoice {
+    grid-template-columns: repeat(4, 1fr); /* Fewer color options per row */
+  }
+}
