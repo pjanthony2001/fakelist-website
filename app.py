@@ -56,7 +56,7 @@ def handle_check_cooldown():
 
 @socketio.on("click_cell")
 def handle_click(data):
-    global batch_data, counter
+    global batch_data, counter, timer
     real_ip = request.headers.get('X-Real-IP')
     
     admin = data["token"] == "245zx5scdvaifuognpd"
